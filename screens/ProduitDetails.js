@@ -13,7 +13,7 @@ export function ProduitDetails({route}){
     const [product, setProduct] = useState({});
 
     //Stock et appel de la carte produit grace au context globale
-    const {addItemTocart} = useContext(CartProvider);
+    const {addItemToCart} = useContext(CartProvider);
 
     //Appel de la fonction apres le 1er render OnComponentDidMount()
     useEffect(() => {
@@ -22,7 +22,7 @@ export function ProduitDetails({route}){
 
     //la fonction ajouter a la carte
     function addToCart(){
-        addItemTocart(product.id);
+        addItemToCart(product.id);
     }
     //Affichage
     return(

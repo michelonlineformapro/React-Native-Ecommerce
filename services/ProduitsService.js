@@ -3,7 +3,7 @@ const PRODUITS = [
         id: 1,
         nom_produit: 'Table en bois',
         prix_produit: 250.25,
-        image_produit: '../assets/img/table.jpg',
+        image_produit: './assets/img/table.jpg',
         description_produit: 'Table de marque IKEA en bois et fer forgé'
     },
     {

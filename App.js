@@ -1,12 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {ProduitsListe} from "./screens/ProduitsListe";
+import {ProduitDetails} from "./screens/ProduitDetails";
+import {Cart} from "./screens/Cart";
+import {CartIcon} from "./component/CartIcon";
+import {CartProvider} from "./CartContext";
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>LA PAGE D'ACCUEIL DE MON ECOMMERCE</Text>
-      <StatusBar style="auto" />
-    </View>
+      <CartProvider>
+          <NavigationContainer>
+          <Stack.Navigator>
+                <Stack.Screen name="Products" component={ProduitsListe}
+                  options={({navigation}) => ({
+                    title: 'Produits',
+                    headerTitleStyle: styles.headerTitle,
+                    headerRight: () => <CartIcon navigation={navigation}/>,
+                  })} />
+              <Stack.Screen name='ProduitDetails' component={ProduitDetails}
+                            options={({ navigation }) => ({
+                                title: 'Product details',
+                                headerTitleStyle: styles.headerTitle,
+                                headerRight: () => <CartIcon navigation={navigation}/>,
+                            })} />
+              <Stack.Screen name='Cart' component={Cart}
+                            options={({ navigation }) => ({
+                                title: 'My cart',
+                                headerTitleStyle: styles.headerTitle,
+                                headerRight: () => <CartIcon navigation={navigation}/>,
+                            })} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </CartProvider>
   );
 }
 
@@ -17,4 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  headerTitle:{
+    fontSize: 20
+  }
 });

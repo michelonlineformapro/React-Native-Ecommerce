@@ -1,14 +1,14 @@
 import React, {createContext, useEffect, useState} from "react";
 import {getProductById, getProducts} from "./services/ProduitsService";
 
-export const cartContext = createContext();
+export const CartContext = createContext();
 
 export function CartProvider(props){
     //Hooks de chaque carte = getter et setter et retourne un tableau
     const [items, setItems] = useState([]);
 
     //Fonction une carte par produit
-    function additemCart(id){
+    function addItemToCart(id){
         //Appel de la fonction des Services
         const product = getProductById(id);
         //Le setter du hook
@@ -21,8 +21,8 @@ export function CartProvider(props){
                 return [...prevItems,{
                     id,
                     qty:1,
-                    product,
-                    totalPrice: product.prix_produit
+                    produit,
+                    totalPrice: produit.prix_produit
                 }];
             }else{
                 //Sinon on retourne un tableau d'item et on incremente la quantité
@@ -30,11 +30,25 @@ export function CartProvider(props){
                     //Si les items matche avec id connue
                     if(item.id === id){
                         item.qty++;
-                        item.totalPrice += product.prix_produit;
+                        item.totalPrice += produit.prix_produit;
                     }
                     return item;
                 })
             }
-        })
+        });
     }
+    function getItemsCount() {
+        return items.reduce((sum,  item) => (sum + item.qty), 0);
+    }
+
+    function  getTotalPrice() {
+        return items.reduce((sum, item) => (sum + item.totalPrice), 0);
+    }
+
+    return(
+        <CartContext.Provider
+            value={{items, setItems, getItemsCount, addItemToCart, getTotalPrice}}>
+            {props.children}
+        </CartContext.Provider>
+    );
 }

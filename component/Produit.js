@@ -2,10 +2,10 @@ import React from 'react';
 //Elements de react native
 import {Text, Image, View, StyleSheet, TouchableOpacity} from "react-native";
 
-export function Produit(nom_produit, prix_produit, image_produit, onPress){
+export function Produit({nom_produit, prix_produit, image_produit, onPress}){
     return (
         <TouchableOpacity style={styles.card} onPress={onPress}>
-            <Image style={styles.thumb} source={image}/>
+            <Image style={styles.thumb} source={image_produit}/>
             <View style={styles.infoContainer}>
                 <Text style={styles.nom}>{nom_produit}</Text>
                 <Text styme={styles.prix}>{prix_produit} €</Text>
