@@ -22,15 +22,15 @@ export default function App() {
                     headerTitleStyle: styles.headerTitle,
                     headerRight: () => <CartIcon navigation={navigation}/>,
                   })} />
-              <Stack.Screen name='ProduitDetails' component={ProduitDetails}
+              <Stack.Screen name='ProductDetails' component={ProduitDetails}
                             options={({ navigation }) => ({
-                                title: 'Product details',
+                                title: 'Détails du produit',
                                 headerTitleStyle: styles.headerTitle,
                                 headerRight: () => <CartIcon navigation={navigation}/>,
                             })} />
               <Stack.Screen name='Cart' component={Cart}
                             options={({ navigation }) => ({
-                                title: 'My cart',
+                                title: 'Mon panier',
                                 headerTitleStyle: styles.headerTitle,
                                 headerRight: () => <CartIcon navigation={navigation}/>,
                             })} />

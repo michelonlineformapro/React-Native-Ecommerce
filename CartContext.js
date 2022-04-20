@@ -21,8 +21,8 @@ export function CartProvider(props){
                 return [...prevItems,{
                     id,
                     qty:1,
-                    produit,
-                    totalPrice: produit.prix_produit
+                    product,
+                    totalPrice: product.prix_produit
                 }];
             }else{
                 //Sinon on retourne un tableau d'item et on incremente la quantité
@@ -30,7 +30,7 @@ export function CartProvider(props){
                     //Si les items matche avec id connue
                     if(item.id === id){
                         item.qty++;
-                        item.totalPrice += produit.prix_produit;
+                        item.totalPrice += product.prix_produit;
                     }
                     return item;
                 })

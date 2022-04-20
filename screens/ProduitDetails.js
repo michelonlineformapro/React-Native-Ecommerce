@@ -3,9 +3,9 @@ import React,{useEffect, useState, useContext} from "react";
 import {Text,Image, View, ScrollView, SafeAreaView, Button, StyleSheet} from "react-native";
 
 //Recup de tous les produits via les services
-import {getProducts} from "../services/ProduitsService";
+import {getProductById, getProducts} from "../services/ProduitsService";
 //Appel de la carte Globale contexte
-import {CartProvider} from "../CartContext";
+import {CartContext} from "../CartContext";
 
 export function ProduitDetails({route}){
     const {productId} = route.params;
@@ -13,14 +13,17 @@ export function ProduitDetails({route}){
     const [product, setProduct] = useState({});
 
     //Stock et appel de la carte produit grace au context globale
-    const {addItemToCart} = useContext(CartProvider);
+    const { addItemToCart } = useContext(CartContext);
 
     //Appel de la fonction apres le 1er render OnComponentDidMount()
     useEffect(() => {
-        setProduct(getProducts(productId));
+        //Appel de la fonction de ProduitsService -> get By ID
+        //En paramètre on passe l'id recup grace a route.params
+        //ici on utilise le setter du hook et l'etat des données
+        setProduct(getProductById(productId));
     });
 
-    //la fonction ajouter a la carte
+    //la fonction ajouter au panier
     function addToCart(){
         addItemToCart(product.id);
     }
@@ -30,15 +33,15 @@ export function ProduitDetails({route}){
             <ScrollView>
                 <Image
                     style={styles.image}
-                    source={product.image}
+                    source={product.image_produit}
                 />
                 <View style={styles.infoContainer}>
                     <Text style={styles.nom}>{product.nom_produit}</Text>
                     <Text style={styles.prix}>{product.prix_produit} €</Text>
-                    <text style={styles.description}>{product.description_produit}</text>
+                    <Text style={styles.description}>{product.description_produit}</Text>
                     <Button
                         onPress={addToCart}
-                        title="Plus d'infos"
+                        title="METTRE AU PANIER"
                     />
                 </View>
             </ScrollView>

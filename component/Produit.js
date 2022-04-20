@@ -5,7 +5,7 @@ import {Text, Image, View, StyleSheet, TouchableOpacity} from "react-native";
 export function Produit({nom_produit, prix_produit, image_produit, onPress}){
     return (
         <TouchableOpacity style={styles.card} onPress={onPress}>
-            <Image style={styles.thumb} source={image_produit}/>
+            <Image style={styles.thumb} source={{uri: image_produit}}/>
             <View style={styles.infoContainer}>
                 <Text style={styles.nom}>{nom_produit}</Text>
                 <Text styme={styles.prix}>{prix_produit} €</Text>
@@ -31,10 +31,13 @@ const styles = StyleSheet.create({
         marginVertical: 20
     },
     thumb:{
-        height: 260,
+        height: 300,
         borderTopLeftRadius: 16,
         borderBottomRightRadius: 16,
-        width: '100%'
+        width: '100%',
+        paddingVertical:8,
+        paddingHorizontal:8
+
     },
     infoContainer: {
         padding:16

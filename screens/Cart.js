@@ -2,10 +2,10 @@ import React,{useEffect, useState, useContext} from "react";
 import {View, Text, Button, FlatList, StyleSheet} from "react-native";
 
 //La carte et le contexte globale
-import {CartProvider} from "../CartContext";
+import {CartContext} from "../CartContext";
 
 export function Cart({navigation}){
-    const {items, getItemsCount, getTotalPrice} = useContext(CartProvider);
+    const {items, getItemsCount, getTotalPrice} = useContext(CartContext);
 
     //Le total des commandes
     function Totals(){
